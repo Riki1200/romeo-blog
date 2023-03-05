@@ -138,7 +138,7 @@ const PostPage: NextPage<Props> = ({
   const ogImage = getPostOGImage(socialImage);
 
   const MDXContent = useMDXComponent(code);
-
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   return (
     <LayoutPerPage>
       <NextSeo

@@ -41,7 +41,7 @@ export default function CommandPalette({ children }: Props) {
     {
       id: 'home',
       name: t('home'),
-      keywords: 'home homepage index 首頁',
+      keywords: 'home homepage index',
       perform: () => router.push('/'),
       icon: <HomeIcon className="h-6 w-6" />,
       section: {
@@ -54,8 +54,7 @@ export default function CommandPalette({ children }: Props) {
     {
       id: 'search-posts',
       name: t('posts'),
-      keywords:
-        'search find posts writing words blog articles thoughts 搜尋 尋找 文章 寫作 部落格',
+      keywords: 'search find posts writing words blog articles thoughts',
       icon: <MagnifyingGlassIcon className="h-6 w-6" />,
       section: t('search'),
     },
@@ -64,14 +63,14 @@ export default function CommandPalette({ children }: Props) {
     {
       id: 'theme',
       name: t('toggle-theme'),
-      keywords: 'change toggle theme mode color 切換 更換 顏色 主題 模式',
+      keywords: 'change toggle theme mode color',
       icon: <LightBulbIcon className="h-6 w-6" />,
       section: t('operation'),
     },
     {
       id: 'theme-light',
       name: t('light-mode'),
-      keywords: 'theme light white mode color 顏色 主題 模式 明亮 白色',
+      keywords: 'theme light white mode color',
       perform: () => setTheme('light'),
       icon: <SunIcon className="h-6 w-6" />,
       parent: 'theme',
@@ -80,7 +79,7 @@ export default function CommandPalette({ children }: Props) {
     {
       id: 'theme-dark',
       name: t('dark-mode'),
-      keywords: 'theme dark black mode color 顏色 主題 模式 暗黑 黑色 深夜',
+      keywords: 'theme dark black mode color',
       perform: () => setTheme('dark'),
       icon: <MoonIcon className="h-6 w-6" />,
       parent: 'theme',
@@ -90,8 +89,7 @@ export default function CommandPalette({ children }: Props) {
     {
       id: 'language',
       name: t('toggle-language'),
-      keywords:
-        'change toggle locale language translation 切換 更換 語言 語系 翻譯',
+      keywords: 'change toggle locale language translation',
       icon: <LanguageIcon className="h-6 w-6" />,
       section: t('operation'),
     },
