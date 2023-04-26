@@ -31,6 +31,7 @@ type PostForPostPage = PostForPostLayout & {
   body: {
     code: string;
   };
+  tags: string[];
 };
 
 type Props = {
@@ -82,14 +83,21 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
     };
   }
   const prevFull = allPostsNewToOld[postIndex + 1] || null;
+
   const prevPost: RelatedPostForPostLayout = prevFull
     ? { title: prevFull.title, path: prevFull.path }
     : null;
+
   const nextFull = allPostsNewToOld[postIndex - 1] || null;
+
   const nextPost: RelatedPostForPostLayout = nextFull
     ? { title: nextFull.title, path: nextFull.path }
     : null;
+
   const postFull = allPostsNewToOld[postIndex];
+
+  const tags: string[] = postFull.tags || [];
+  console.log(tags);
   const post: PostForPostPage = {
     title: postFull.title,
     date: postFull.date,
@@ -100,6 +108,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
       code: postFull.body.code,
       raw: postFull.body.raw,
     },
+    tags: tags,
   };
 
   if (!post) {
@@ -138,7 +147,7 @@ const PostPage: NextPage<Props> = ({
   const ogImage = getPostOGImage(socialImage);
 
   const MDXContent = useMDXComponent(code);
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
   return (
     <LayoutPerPage>
       <NextSeo

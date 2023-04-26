@@ -32,6 +32,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     title: post.title,
     description: post.description,
     path: post.path,
+    tags: post.tags,
   })) as PostForIndexPage[];
 
   generateRSS();

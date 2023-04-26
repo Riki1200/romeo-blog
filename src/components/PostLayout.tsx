@@ -12,6 +12,7 @@ export interface PostForPostLayout {
   date: string;
   title: string;
   body: { raw: string };
+  tags: string[];
 }
 
 export type RelatedPostForPostLayout = {

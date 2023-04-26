@@ -9,6 +9,7 @@ export interface PostForPostList {
   title: string;
   description: string;
   path: string;
+  tags?: string[];
 }
 
 type Props = {
@@ -22,7 +23,7 @@ export default function PostList({ posts = [] }: Props) {
     <ul className="divide-y divide-gray-200 transition-colors dark:divide-gray-700">
       {!posts.length && 'No posts found.'}
       {posts.map((post) => {
-        const { slug, date, title, description, path } = post;
+        const { slug, date, title, description, path, tags } = post;
         return (
           <li key={slug} className="group transition-colors">
             <CustomLink href={path}>
@@ -33,14 +34,27 @@ export default function PostList({ posts = [] }: Props) {
                     <time dateTime={date}>{formatDate(date, locale)}</time>
                   </dd>
                 </dl>
-                <div className="space-y-3 xl:col-span-3">
+                <div className="space-y-3 xl:col-span-2">
                   <div>
                     <h3 className="text-lg font-bold tracking-tight text-gray-900 transition-colors dark:text-gray-100 sm:text-xl md:text-2xl">
                       {title}
                     </h3>
                   </div>
-                  <div className="prose prose-sm max-w-none text-gray-500 transition-colors dark:text-gray-400 md:prose-base">
+                  <div className="prose prose-sm max-w-none text-gray-500 transition-colors md:prose-base dark:text-gray-400">
                     {description}
+                  </div>
+                </div>
+                <div className="space-y-4 xl:col-span-1">
+                  <div className="prose prose-sm max-w-none text-gray-500 transition-colors md:prose-base dark:text-gray-400">
+                    {tags &&
+                      tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="mr-5 rounded-full bg-gray-100  py-2	 px-4 font-semibold dark:bg-gray-800 "
+                        >
+                          {tag}
+                        </span>
+                      ))}
                   </div>
                 </div>
               </article>
