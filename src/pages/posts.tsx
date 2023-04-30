@@ -37,9 +37,9 @@ const tagFilter = [
   'Dart',
   'Firebase',
   'AWS',
-  'GCP',
+  'Azure',
   'Python',
-  'Django',
+  'AI / ML',
 ];
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
@@ -69,10 +69,21 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
 };
 
 const Post: NextPage<Props> = ({ posts, commandPalettePosts }) => {
+  const [filterPosts, setFilterPosts] = useState(posts);
   const { t } = useTranslation(['common']);
   const [selectedType, setSelectedType] = useState('All');
   const [isFiltering, setIsFiltering] = useState(false);
   useCommandPalettePostActions(commandPalettePosts);
+
+  const handleFilter = (type: string) => {
+    setSelectedType(type);
+    const result = posts.filter((v) =>
+      v.tags?.toLocaleString().toLowerCase().includes(type.toLowerCase())
+    );
+
+    setFilterPosts(result);
+    console.log(result);
+  };
 
   console.log(posts);
   return (
@@ -121,7 +132,7 @@ const Post: NextPage<Props> = ({ posts, commandPalettePosts }) => {
                   ? 'bg-gray-200 dark:bg-gray-700'
                   : 'bg-gray-100 dark:bg-gray-800'
               } rounded-full  py-2 px-4 font-semibold   dark:bg-gray-700 dark:text-white`}
-              onClick={() => setSelectedType(type)}
+              onClick={() => handleFilter(type)}
             >
               {type}
             </button>
@@ -129,7 +140,7 @@ const Post: NextPage<Props> = ({ posts, commandPalettePosts }) => {
         </div>
         <div className="pb-10"></div>
 
-        <PostList posts={posts} />
+        <PostList posts={filterPosts} />
       </div>
     </LayoutPerPage>
   );
